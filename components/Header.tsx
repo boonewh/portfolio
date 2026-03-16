@@ -54,7 +54,7 @@ export default function Header() {
         >
           <span
             style={{
-              fontFamily: 'var(--font-alkatra)',
+              fontFamily: 'var(--font-kaushan-script)',
               fontSize: '22px',
               color: '#ffffff',
               letterSpacing: '0.01em',
@@ -171,7 +171,7 @@ export default function Header() {
           >
             {/* Close */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-              <span style={{ fontFamily: 'var(--font-alkatra)', fontSize: '20px', color: '#fff' }}>
+              <span style={{ fontFamily: 'var(--font-kaushan-script)', fontSize: '20px', color: '#fff' }}>
                 Will Boone
               </span>
               <button
