@@ -15,7 +15,9 @@ Here's the thing people get wrong about building with AI: they think it's copy-p
 
 The real workflow looks more like a conversation. I'd describe a problem, we'd talk through a few approaches, I'd push back on one, ask about edge cases on another. The AI would draft something. I'd read it, understand it, change it. Sometimes significantly.
 
-The code is mine. The understanding is mine. The architecture decisions are mine. AI just made the iteration loop faster.
+Now, that being said, there was a lot of copy and paste in the 2024 version of what I was doing with the code. At the time I was being stubborn and refused to try anything that "touched" my code. I still have not used Cursor, and it was the hot thing for a long time back then. I talked to the AI, fed it files that I was working on and the context it needed and had it generate code that I would read over and copy/paste into VS Code. That was my workflow for the entire CRM. 
+
+However, by using the copy/paste method, I firmly believe that the code is mine. The understanding is mine. The architecture decisions are mine. AI just made the iteration loop faster.
 
 ## Where it helped most
 
@@ -33,10 +35,16 @@ That context lives in your head. And every time I forgot to bring it into the co
 
 The more specific I was, the better the results. That's the skill — learning to describe your problem precisely enough that the answer is actually useful.
 
+And you know what was really horrible? The first database migration that I tried to let AI lead the way through took three really horrible hours. I had never used Fly.io products. We figured it out and I made sure to create a page that spelled out what we had done wrong and what finally worked so that I could feed that to the AI in future episodes. It make the three hour migration a really easy five minute migration from that point forward. 
+
+Fast forward to 2026 and I decided to use Next.js and Neon for my Nudge projects. I was amazed when I asked Claude Code about a migration and it told me that it had already done it. Wow. 
+
 ## Would I do it again?
 
-I'm doing it again. Nudge Together is being built the same way.
+I'm doing it again. Nudge Together is being built with even more AI than the CRM. The models have gotten so much better. Even as soon as the end of 2025 saw a big jump in coding capabilites for the LLMs. MCP servers, skills, harnesses, agentic flows, I could go on and on.
 
 The honest answer is that know I could not have shipped PathSix CRM as fast, as cleanly, or with as few bugs if I'd done it completely alone. Even with 2024 versions of AI, I was finished in five months. There were still bugs to be uncovered, but my client who is using the CRM hasn't called me with a bug in ages. The last one was about two months after they started using it. And honestly? That was only because I showed him a demo of what was supposed to be the MVP and he said "Great, I'm going to start using it." Learned a valuable lesson that day. But yes, the iteration speed changes what's possible. You can try more things. You can throw away a bad approach without feeling like you wasted a week.
+
+And these days? Agents make that even faster. I've given over to allowing the agents to "touch" my code. I'm using multiple models in VS Code, directly in the CLI, and sometimes on my phone. I should really ssh into my computer at home, but when you can just run Claude Code directly in Termux on the phone, that's a strong temptation, isn't it?
 
 That's the real value. Not the code. The speed of the loop.

@@ -24,7 +24,7 @@ import GlowScroll from '@/components/GlowScroll';
 
 export default function Home() {
   return (
-    <div className="bg-white dark:bg-[#050505] min-h-screen relative selection:bg-cyan-500/30 overflow-x-hidden">
+    <div className="bg-[#050505] min-h-screen relative selection:bg-cyan-500/30 overflow-x-hidden">
       <GlowScroll />
       <Header />
       <main className="flex flex-col relative z-0">
