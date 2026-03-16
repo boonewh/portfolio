@@ -98,7 +98,7 @@ export default function PathSixCRM() {
         </motion.p>
 
         <motion.h2
-          style={{ fontFamily: 'var(--font-kaushan-script)', fontSize: isMobile ? '56px' : 'clamp(56px, 7.5vw, 110px)', lineHeight: 1.05, color: '#ffffff', marginBottom: '20px' }}
+          style={{ fontFamily: 'var(--font-alkatra)', fontSize: isMobile ? '56px' : 'clamp(56px, 7.5vw, 110px)', lineHeight: 1.05, color: '#ffffff', marginBottom: '20px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.3, ease: EXPO_OUT }}

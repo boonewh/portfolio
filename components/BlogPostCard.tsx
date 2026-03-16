@@ -21,7 +21,7 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
           <div style={{ flex: 1 }}>
             <h2
               style={{
-                fontFamily: 'var(--font-kaushan-script)',
+                fontFamily: 'var(--font-alkatra)',
                 fontSize: 'clamp(22px, 3vw, 32px)',
                 color: '#ffffff',
                 marginBottom: '10px',

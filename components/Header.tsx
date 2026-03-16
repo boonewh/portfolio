@@ -22,6 +22,7 @@ export default function Header() {
   }, []);
 
   return (
+    <>
     <header
       style={{
         position: 'fixed',
@@ -53,7 +54,7 @@ export default function Header() {
         >
           <span
             style={{
-              fontFamily: 'var(--font-kaushan-script)',
+              fontFamily: 'var(--font-alkatra)',
               fontSize: '22px',
               color: '#ffffff',
               letterSpacing: '0.01em',
@@ -138,102 +139,102 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-              style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(0,0,0,0.6)' }}
-              className="lg:hidden"
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              style={{
-                position: 'fixed',
-                inset: '0 0 0 auto',
-                zIndex: 51,
-                width: '280px',
-                background: '#0d0d0d',
-                borderLeft: '1px solid rgba(255,255,255,0.08)',
-                padding: '24px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-              className="lg:hidden"
-            >
-              {/* Close */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-                <span style={{ fontFamily: 'var(--font-kaushan-script)', fontSize: '20px', color: '#fff' }}>
-                  Will Boone
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.5)', padding: '4px' }}
-                  aria-label="Close menu"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="22" height="22" aria-hidden="true">
-                    <path d="M6 18 18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Links */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    style={{
-                      fontFamily: 'var(--font-geist-mono)',
-                      fontSize: '12px',
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      textDecoration: 'none',
-                      color: 'rgba(255,255,255,0.85)',
-                      padding: '12px 0',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-
-              {/* PathSix Solutions */}
-              <a
-                href="https://pathsixsolutions.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  marginTop: '32px',
-                  fontFamily: 'var(--font-geist-mono)',
-                  fontSize: '11px',
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  textDecoration: 'none',
-                  color: '#22d3ee',
-                  border: '1px solid rgba(34,211,238,0.3)',
-                  borderRadius: '4px',
-                  padding: '10px 16px',
-                  textAlign: 'center',
-                }}
-              >
-                PathSix Solutions ↗
-              </a>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </header>
+
+    {/* Mobile menu — outside <header> to avoid backdrop-filter containing block issue */}
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setMobileMenuOpen(false)}
+            style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(0,0,0,0.6)' }}
+          />
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            style={{
+              position: 'fixed',
+              inset: '0 0 0 auto',
+              zIndex: 51,
+              width: '280px',
+              background: '#0d0d0d',
+              borderLeft: '1px solid rgba(255,255,255,0.08)',
+              padding: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {/* Close */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+              <span style={{ fontFamily: 'var(--font-alkatra)', fontSize: '20px', color: '#fff' }}>
+                Will Boone
+              </span>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.5)', padding: '4px' }}
+                aria-label="Close menu"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="22" height="22" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Links */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    fontFamily: 'var(--font-geist-mono)',
+                    fontSize: '12px',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    color: 'rgba(255,255,255,0.85)',
+                    padding: '12px 0',
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* PathSix Solutions */}
+            <a
+              href="https://pathsixsolutions.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                marginTop: '32px',
+                fontFamily: 'var(--font-geist-mono)',
+                fontSize: '11px',
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                color: '#22d3ee',
+                border: '1px solid rgba(34,211,238,0.3)',
+                borderRadius: '4px',
+                padding: '10px 16px',
+                textAlign: 'center',
+              }}
+            >
+              PathSix Solutions ↗
+            </a>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+    </>
   );
 }

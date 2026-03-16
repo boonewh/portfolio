@@ -102,7 +102,7 @@ export default function WebWork() {
         </motion.p>
         <motion.h2
           style={{
-            fontFamily: 'var(--font-kaushan-script)',
+            fontFamily: 'var(--font-alkatra)',
             fontSize: 'clamp(42px, 6vw, 88px)',
             lineHeight: 1.0,
             color: '#ffffff',

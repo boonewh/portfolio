@@ -136,7 +136,7 @@ function AppCard({
           {/* App name */}
           <h3
             style={{
-              fontFamily: 'var(--font-kaushan-script)',
+              fontFamily: 'var(--font-alkatra)',
               fontSize: 'clamp(28px, 3.5vw, 52px)',
               lineHeight: 1.05,
               color: '#ffffff',
@@ -335,7 +335,7 @@ export default function AIBuilds() {
         </motion.p>
         <motion.h2
           style={{
-            fontFamily: 'var(--font-kaushan-script)',
+            fontFamily: 'var(--font-alkatra)',
             fontSize: 'clamp(42px, 6vw, 88px)',
             lineHeight: 1.0,
             color: '#ffffff',

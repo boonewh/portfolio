@@ -84,7 +84,7 @@ export default function Contact() {
 
         <motion.h2
           style={{
-            fontFamily: 'var(--font-kaushan-script)',
+            fontFamily: 'var(--font-alkatra)',
             fontSize: 'clamp(42px, 6vw, 88px)',
             lineHeight: 1.0,
             color: '#ffffff',
@@ -132,7 +132,7 @@ export default function Contact() {
         >
           <span
             style={{
-              fontFamily: 'var(--font-kaushan-script)',
+              fontFamily: 'var(--font-alkatra)',
               fontSize: 'clamp(22px, 3vw, 36px)',
               color: '#22c55e',
             }}

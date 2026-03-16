@@ -106,7 +106,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           )}
           <h1
             style={{
-              fontFamily: 'var(--font-kaushan-script)',
+              fontFamily: 'var(--font-alkatra)',
               fontSize: 'clamp(36px, 5vw, 64px)',
               lineHeight: 1.1,
               color: '#ffffff',

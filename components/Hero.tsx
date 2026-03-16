@@ -79,7 +79,7 @@ export default function Hero() {
         <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
           <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
             <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
-              <h1 className="text-pretty text-7xl font-semibold tracking-tight text-gray-900 sm:text-9xl dark:text-white font-(family-name:--font-kaushan-script)">
+              <h1 className="text-pretty text-7xl font-semibold tracking-tight text-gray-900 sm:text-9xl dark:text-white font-(family-name:--font-alkatra)">
                 Will Boone
               </h1>
               <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none dark:text-gray-400">

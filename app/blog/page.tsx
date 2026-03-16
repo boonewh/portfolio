@@ -68,7 +68,7 @@ export default function BlogPage() {
           </p>
           <h1
             style={{
-              fontFamily: 'var(--font-kaushan-script)',
+              fontFamily: 'var(--font-alkatra)',
               fontSize: 'clamp(42px, 6vw, 80px)',
               lineHeight: 1.0,
               color: '#ffffff',
