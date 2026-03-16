@@ -24,3 +24,95 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ── Blog post prose styles ── */
+.prose-blog {
+  font-family: var(--font-geist-sans);
+  font-size: 16px;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.prose-blog h2 {
+  font-family: var(--font-kaushan-script);
+  font-size: clamp(24px, 3vw, 36px);
+  color: #ffffff;
+  margin-top: 52px;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.prose-blog h3 {
+  font-family: var(--font-geist-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 36px;
+  margin-bottom: 12px;
+}
+
+.prose-blog p {
+  margin-bottom: 24px;
+}
+
+.prose-blog strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.prose-blog a {
+  color: #22d3ee;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-blog ul,
+.prose-blog ol {
+  padding-left: 24px;
+  margin-bottom: 24px;
+}
+
+.prose-blog li {
+  margin-bottom: 8px;
+}
+
+.prose-blog code {
+  font-family: var(--font-geist-mono);
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: #22d3ee;
+}
+
+.prose-blog pre {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin-bottom: 28px;
+}
+
+.prose-blog pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+.prose-blog blockquote {
+  border-left: 2px solid #a855f7;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+  margin: 28px 0;
+}
+
+.prose-blog hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 40px 0;
+}

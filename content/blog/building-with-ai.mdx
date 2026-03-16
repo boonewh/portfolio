@@ -1,0 +1,42 @@
+---
+title: "Building a CRM with AI in the Room"
+date: "2026-03-15"
+excerpt: "What it's actually like to build a full production app when AI is your collaborator, not just your autocomplete."
+tags: ["AI", "CRM", "Quart", "React"]
+---
+
+I built PathSix CRM over the course of a few months. It's a full customer relationship platform — leads, accounts, follow-ups, calendar, projects, reports. The whole thing. And I built most of it with Claude sitting next to me.
+
+Not as a shortcut. As a collaborator.
+
+## What that actually looks like
+
+Here's the thing people get wrong about building with AI: they think it's copy-paste programming. Prompt in, code out, done. That's not how it works — or at least, that's not how it works well.
+
+The real workflow looks more like a conversation. I'd describe a problem, we'd talk through a few approaches, I'd push back on one, ask about edge cases on another. The AI would draft something. I'd read it, understand it, change it. Sometimes significantly.
+
+The code is mine. The understanding is mine. The architecture decisions are mine. AI just made the iteration loop faster.
+
+## Where it helped most
+
+**Boilerplate that would have taken a day.** Setting up a Quart backend with PostgreSQL, connection pooling, session management — stuff I know how to do but that takes time to write cleanly. Having a solid draft in minutes meant I could spend my time on the actual logic.
+
+**Edge cases I might have missed.** When I described the follow-up reminder system, Claude immediately asked about timezone handling. I had thought about it but hadn't spec'd it out yet. That kind of back-and-forth caught things early.
+
+**Explaining my own code back to me.** This sounds strange, but when you're deep in a feature and you come back the next day, having something that can summarize what a function does in plain English is useful.
+
+## Where I had to lead
+
+The AI doesn't know your users. It doesn't know that your client base is small business owners in West Texas who are not going to read a tooltip. It doesn't know the product decisions you made three weeks ago and why.
+
+That context lives in your head. And every time I forgot to bring it into the conversation, the output was generic. Technically correct, contextually wrong.
+
+The more specific I was, the better the results. That's the skill — learning to describe your problem precisely enough that the answer is actually useful.
+
+## Would I do it again?
+
+I'm doing it again. Nudge Together is being built the same way.
+
+The honest answer is that know I could not have shipped PathSix CRM as fast, as cleanly, or with as few bugs if I'd done it completely alone. Even with 2024 versions of AI, I was finished in five months. There were still bugs to be uncovered, but my client who is using the CRM hasn't called me with a bug in ages. The last one was about two months after they started using it. And honestly? That was only because I showed him a demo of what was supposed to be the MVP and he said "Great, I'm going to start using it." Learned a valuable lesson that day. But yes, the iteration speed changes what's possible. You can try more things. You can throw away a bad approach without feeling like you wasted a week.
+
+That's the real value. Not the code. The speed of the loop.

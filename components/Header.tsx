@@ -1,57 +1,141 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+
+const navLinks = [
+  { label: 'Built w/ AI',  href: '#crm'       },
+  { label: 'AI First',     href: '#ai-builds'  },
+  { label: 'Web Work',     href: '#web-work'   },
+  { label: 'Blog',         href: '/blog'       },
+  { label: 'Contact',      href: '#contact'    },
+];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <Image
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              alt=""
-              width={32}
-              height={32}
-              className="h-8 w-auto dark:hidden"
-            />
-            <Image
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-              alt=""
-              width={32}
-              height={32}
-              className="hidden h-8 w-auto dark:block"
-            />
-          </a>
-        </div>
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-200"
+    <header
+      style={{
+        position: 'fixed',
+        inset: '0 0 auto 0',
+        zIndex: 50,
+        transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+        background: scrolled ? 'rgba(5,5,5,0.85)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+      }}
+    >
+      <nav
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 clamp(24px, 4vw, 48px)',
+          height: '64px',
+        }}
+        aria-label="Global"
+      >
+        {/* Logo */}
+        <a
+          href="#"
+          style={{ textDecoration: 'none', flexShrink: 0 }}
+          aria-label="Will Boone — home"
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-kaushan-script)',
+              fontSize: '22px',
+              color: '#ffffff',
+              letterSpacing: '0.01em',
+            }}
           >
-            <span className="sr-only">Open main menu</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" className="size-6">
-              <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
-        <div className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">Product</a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">Features</a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">Marketplace</a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">Company</a>
-        </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
+            Will Boone
+          </span>
+        </a>
+
+        {/* Desktop nav */}
+        <div
+          className="hidden lg:flex"
+          style={{ alignItems: 'center', gap: '32px' }}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              style={{
+                fontFamily: 'var(--font-geist-mono)',
+                fontSize: '11px',
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                color: 'rgba(255,255,255,0.5)',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#22d3ee')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+            >
+              {link.label}
+            </a>
+          ))}
+
+          {/* PathSix Solutions — styled as external CTA */}
+          <a
+            href="https://pathsixsolutions.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: 'var(--font-geist-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              color: '#22d3ee',
+              border: '1px solid rgba(34,211,238,0.3)',
+              borderRadius: '4px',
+              padding: '5px 12px',
+              transition: 'background 0.2s, border-color 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(34,211,238,0.08)';
+              e.currentTarget.style.borderColor = 'rgba(34,211,238,0.6)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.borderColor = 'rgba(34,211,238,0.3)';
+            }}
+          >
+            PathSix ↗
           </a>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen(true)}
+          className="lg:hidden"
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: 'rgba(255,255,255,0.7)',
+            padding: '8px',
+          }}
+          aria-label="Open menu"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="24" height="24" aria-hidden="true">
+            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </nav>
 
       {/* Mobile menu */}
@@ -63,67 +147,89 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-50 bg-black/20 lg:hidden"
+              style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(0,0,0,0.6)' }}
+              className="lg:hidden"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10 lg:hidden"
+              style={{
+                position: 'fixed',
+                inset: '0 0 0 auto',
+                zIndex: 51,
+                width: '280px',
+                background: '#0d0d0d',
+                borderLeft: '1px solid rgba(255,255,255,0.08)',
+                padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+              className="lg:hidden"
             >
-              <div className="flex items-center justify-between">
-                <a href="#" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Your Company</span>
-                  <Image
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="h-8 w-auto dark:hidden"
-                  />
-                  <Image
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="hidden h-8 w-auto dark:block"
-                  />
-                </a>
+              {/* Close */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+                <span style={{ fontFamily: 'var(--font-kaushan-script)', fontSize: '20px', color: '#fff' }}>
+                  Will Boone
+                </span>
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-200"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.5)', padding: '4px' }}
+                  aria-label="Close menu"
                 >
-                  <span className="sr-only">Close menu</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" className="size-6">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="22" height="22" aria-hidden="true">
                     <path d="M6 18 18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
               </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
-                  <div className="space-y-2 py-6">
-                    <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
-                      Product
-                    </a>
-                    <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
-                      Features
-                    </a>
-                    <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
-                      Marketplace
-                    </a>
-                    <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
-                      Company
-                    </a>
-                  </div>
-                  <div className="py-6">
-                    <a href="#" className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">
-                      Log in
-                    </a>
-                  </div>
-                </div>
+
+              {/* Links */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      fontFamily: 'var(--font-geist-mono)',
+                      fontSize: '12px',
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      textDecoration: 'none',
+                      color: 'rgba(255,255,255,0.85)',
+                      padding: '12px 0',
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
+
+              {/* PathSix Solutions */}
+              <a
+                href="https://pathsixsolutions.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  marginTop: '32px',
+                  fontFamily: 'var(--font-geist-mono)',
+                  fontSize: '11px',
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  color: '#22d3ee',
+                  border: '1px solid rgba(34,211,238,0.3)',
+                  borderRadius: '4px',
+                  padding: '10px 16px',
+                  textAlign: 'center',
+                }}
+              >
+                PathSix Solutions ↗
+              </a>
             </motion.div>
           </>
         )}

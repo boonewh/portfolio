@@ -13,12 +13,13 @@ interface AnimatedIconProps {
   iconClass: string;
   delay: number;
   index: number;
+  size?: string;
 }
 
-function AnimatedIcon({ iconClass, delay, index }: AnimatedIconProps) {
+function AnimatedIcon({ iconClass, delay, index, size = 'text-8xl' }: AnimatedIconProps) {
   return (
     <motion.i
-      className={`${iconClass} text-8xl`}
+      className={`${iconClass} ${size}`}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
         opacity: 1,
@@ -78,18 +79,21 @@ export default function Hero() {
         <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
           <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
             <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
-              <h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl dark:text-white">
+              <h1 className="text-pretty text-7xl font-semibold tracking-tight text-gray-900 sm:text-9xl dark:text-white font-(family-name:--font-kaushan-script)">
                 Will Boone
               </h1>
               <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none dark:text-gray-400">
-                Software Engineer, specializing in building exceptional digital experiences.
+                Software Developer building modern web platforms and AI-driven applications.
+              </p>
+              <p className="mt-4 text-pretty text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none dark:text-gray-400">
+                Specializing in LLM and RAG systems that turn data into useful products.
               </p>
             </div>
 
-            {/* Bento Grid - Tech Stack Icons */}
-            <div className="mt-14 flex justify-end gap-6 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+            {/* Bento Grid - Tech Stack Icons — desktop only */}
+            <div className="hidden sm:flex mt-14 justify-end gap-6 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
               {/* Column 1 */}
-              <div className="ml-auto w-32 flex-none space-y-6 pt-8 sm:ml-0 sm:pt-32 lg:order-last lg:pt-8 xl:order-none xl:pt-32">
+              <div className="ml-auto w-32 flex-none space-y-6 pt-8 sm:ml-0 sm:pt-32 lg:order-last lg:pt-8 xl:order-0 xl:pt-32">
                 <div className="relative aspect-square w-full flex items-center justify-center">
                   <AnimatedIcon iconClass={icons[0]} delay={0.1} index={0} />
                 </div>
@@ -139,6 +143,15 @@ export default function Hero() {
                   <AnimatedIcon iconClass={icons[11]} delay={1.2} index={11} />
                 </div>
               </div>
+            </div>
+
+            {/* Mobile icon grid — hidden on sm+ */}
+            <div className="sm:hidden grid grid-cols-4 gap-5 mt-12">
+              {icons.map((iconClass, i) => (
+                <div key={iconClass} className="flex items-center justify-center">
+                  <AnimatedIcon iconClass={iconClass} size="text-5xl" delay={i * 0.08} index={i} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
