@@ -11,7 +11,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   try {
     const { meta } = getPostBySlug(slug);
-    return { title: `${meta.title} — Will Boone`, description: meta.excerpt };
+    const url = `https://www.willboone.dev/blog/${slug}`;
+    return {
+      title: meta.title,
+      description: meta.excerpt,
+      openGraph: {
+        type: 'article',
+        url,
+        title: meta.title,
+        description: meta.excerpt,
+        publishedTime: meta.date,
+        authors: ['Will Boone'],
+        tags: meta.tags,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: meta.title,
+        description: meta.excerpt,
+      },
+      alternates: {
+        canonical: url,
+      },
+    };
   } catch {
     return {};
   }

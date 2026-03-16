@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background box -->
+  <rect width="32" height="32" rx="5" fill="#050505"/>
+  <!-- Cyan border -->
+  <rect x="1.5" y="1.5" width="29" height="29" rx="4" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.7"/>
+  <!-- WB text -->
+  <text
+    x="16"
+    y="22"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="15"
+    font-weight="700"
+    fill="#22d3ee"
+    text-anchor="middle"
+    letter-spacing="-0.5"
+  >WB</text>
+</svg>

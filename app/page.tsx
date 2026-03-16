@@ -1,4 +1,20 @@
+import type { Metadata } from 'next';
 import Header from '@/components/Header';
+
+export const metadata: Metadata = {
+  title: 'Will Boone — Software Developer',
+  description:
+    'Software developer building modern web platforms and AI-driven applications. Specializing in LLM and RAG systems that turn data into useful products.',
+  openGraph: {
+    url: 'https://www.willboone.dev',
+    title: 'Will Boone — Software Developer',
+    description:
+      'Software developer building modern web platforms and AI-driven applications. Specializing in LLM and RAG systems.',
+  },
+  alternates: {
+    canonical: 'https://www.willboone.dev',
+  },
+};
 import Hero from '@/components/Hero';
 import PathSixCRM from '@/components/PathSixCRM';
 import AIBuilds from '@/components/AIBuilds';

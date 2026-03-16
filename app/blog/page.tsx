@@ -3,8 +3,16 @@ import { getAllPosts } from '@/lib/blog';
 import BlogPostCard from '@/components/BlogPostCard';
 
 export const metadata = {
-  title: 'Blog — Will Boone',
+  title: 'Blog',
   description: 'Thoughts on building with AI, web development, and shipping software.',
+  openGraph: {
+    url: 'https://www.willboone.dev/blog',
+    title: 'Blog — Will Boone',
+    description: 'Thoughts on building with AI, web development, and shipping software.',
+  },
+  alternates: {
+    canonical: 'https://www.willboone.dev/blog',
+  },
 };
 
 export default function BlogPage() {
