@@ -1,0 +1,171 @@
+---
+title: "Separation of Concerns"
+date: "2026-03-22"
+excerpt: "A foundational principle in software development — how keeping HTML, CSS, JavaScript, and logic in separate, focused modules makes code easier to read, maintain, and scale."
+tags: ["software design", "web development", "architecture"]
+---
+
+# Separation of Concerns
+
+## A Quick Note
+
+This essay was originally written in late 2023 while I was in school. It takes a hard-line approach to separation of concerns—largely because that was the expectation set by the assignment.
+
+I’ve kept it here as a reference point for one interpretation of the concept, even though it represents a more rigid stance than many developers would take in practice. It reflects a perspective that, while valid, sits on the stricter end of the spectrum.
+
+For balance, I’ve also written a separate blog entry that serves as a counterpoint to this approach.
+
+## Introduction
+
+Separation of concerns is a fundamental philosophy in software development that offers an elegant solution to managing the complexity of large, complex applications. At its core, separation of concerns dictates that every layer of an application should be a self-contained unit, written to perform a single, well-defined task, with no code that ties it to other tasks or concerns.
+
+The organization of the code should establish clear boundaries based on purpose, making the code easier to read and maintain. Each component, whether a method in Java or a file in web development, should be laser-focused to enhance the clarity and scalability of the application.
+
+For example, consider a Java application where every class lends organization, and every method has a specific, clear job. In web development, a good start is writing each file to concentrate on a specific job and not mixing your languages in a single file. Separation of concerns can go much further in web development, but "one file, one task, one language" is a powerful starting point.
+
+---
+
+## Separation of Concerns in Web Development
+
+Separation of concerns in web development begins with an understanding of the results you get from mixing your languages.
+
+Fundamentally, HTML, CSS, and JavaScript should be segregated into separate files. Inline and embedded CSS are direct violations of separation of concerns, as is inline JavaScript.
+
+### Example of Inline JavaScript
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inline JavaScript</title>
+</head>
+<body>
+  <script>
+    alert('Hello, world!');
+  </script>
+</body>
+</html>
+```
+
+### Example of Embedded CSS
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embedded CSS</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: black;
+    }
+    p {
+      font-size: 16px;
+      color: white;
+    }
+  </style>
+</head>
+
+<h1>This is a heading</h1>
+
+<p>This is a paragraph of text.</p>
+
+<body>
+</body>
+</html>
+```
+
+Even simple examples like these can lead to issues. Embedded CSS makes pages harder to read and maintain. Inline JavaScript becomes difficult to locate and debug.
+
+Example of tight coupling:
+
+```html
+<input type="number" id="d6Num" value="1" min="1">
+<button onclick="rollDice('d6')">Roll</button>
+```
+
+Here, HTML and JavaScript are tied together. Changing one can break the other.
+
+---
+
+## Benefits of Separation of Concerns
+
+Without separation, a moderately sized website becomes difficult to maintain. A new developer may spend days untangling code before making improvements.
+
+With proper structure:
+- HTML templates in one place
+- CSS files in one place
+- JavaScript files organized
+- Backend logic separated
+
+A developer can quickly understand and extend the system.
+
+---
+
+## Planning for Separation of Concerns
+
+Separation starts during planning—not just coding.
+
+Steps:
+1. Define the goal of the application
+2. Break it into smaller tasks
+3. Build modules that each handle one responsibility
+
+### Cohesion and Coupling
+
+- **High cohesion**: elements within a module belong together
+- **Loose coupling**: modules depend on each other as little as possible
+
+Loose coupling allows:
+- Easier updates
+- Swappable components
+- Better long-term maintainability
+
+---
+
+## Advantages of Separation of Concerns
+
+- Code reuse (e.g., shared validation scripts)
+- Scalability (add features without rewriting everything)
+- Team efficiency (parallel work without blocking)
+- Easier debugging and maintenance
+- Improved readability
+
+---
+
+## The Role of Templating
+
+Templating solves duplication issues in HTML.
+
+Instead of repeating headers/footers across pages:
+- Create reusable templates
+- Inject dynamic content where needed
+
+Example tools:
+- Jinja
+- Other template engines
+
+Benefits:
+- Write once, reuse everywhere
+- Easier updates
+- Cleaner structure
+
+Templating also allows:
+- Designers and developers to work independently
+- Reduced need for constant coordination
+
+---
+
+## Conclusion
+
+Separation of concerns is a foundational principle in software development.
+
+It:
+- Reduces complexity
+- Improves maintainability
+- Enables scalability
+- Encourages clean architecture
+
+By building small, focused, and independent modules with high cohesion and loose coupling, developers create systems that are easier to understand, extend, and maintain over time.
+
+Whether applied to web development or general software design, separation of concerns remains essential for building robust and efficient applications.

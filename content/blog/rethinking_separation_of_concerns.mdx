@@ -1,0 +1,56 @@
+---
+title: "Rethinking Separation of Concerns"
+date: "2026-03-22"
+excerpt: "The strict version of separation of concerns made sense in 2005. Modern frameworks have changed the calculus — here's how I think about it now."
+tags: ["software design", "web development", "architecture"]
+---
+
+# Rethinking Separation of Concerns
+
+## Author’s Note
+
+This is a rewrite of a “rebuttal” I originally published on my old portfolio. With more experience behind me, that version does not hold up particularly well. At the time, I took a hard stance and directed more frustration at the professor than the idea itself.
+
+Looking back, I can see the intent behind what he was teaching, even if I still think the delivery was heavier than it needed to be. The rules were strict, sometimes to the point of feeling absolute, and that left a lasting impression early on.
+
+---
+
+## Introduction
+
+This post revisits an essay I wrote in college about separation of concerns. I’ve kept the original because it reflects where I was at the time, both in my understanding of the concept and in how I approached writing about it.
+
+Since then, working on real projects has reshaped how I think about code structure. Some of the rigid patterns I learned early on have given way to a more practical approach that better fits how modern tools and frameworks are actually used.
+
+When I first learned separation of concerns, it was presented in a very strict way. The rule was simple: each language belonged in its own file. HTML files contained only HTML. CSS lived in its own files. JavaScript stayed separate, with no inline usage. Even small things like attaching an onclick attribute to a button were treated as violations.
+
+At the time, that approach made sense in the context of learning. It created clear boundaries and forced discipline. It also aligned with other concepts being introduced, particularly MVC, where separating responsibilities across layers is essential. When you are new to development, having firm rules can help prevent confusion and reduce bad habits.
+
+The issue is not that this version of separation of concerns exists. The issue is treating it as the only correct way to write code.
+
+---
+
+## Where My Perspective Changed
+
+After graduation, I started building projects outside of that environment and working with tools that are standard in modern web development. That is where my understanding began to shift. The clean separation I had learned did not always translate well to the tools I was using.
+
+In React and Next.js, for example, components are designed to group related logic, markup, and styling together. A single component can contain structure, behavior, and presentation in one place. At first, this felt wrong based on how I had been taught. It looked like everything was being mixed together.
+
+In practice, the opposite is happening.
+
+The separation still exists, but it happens at a different level. Instead of separating by language across an entire application, the separation is handled at the component level. Each component is responsible for a single piece of functionality. The concerns are isolated within that boundary rather than spread across multiple global files.
+
+I ran into this directly when working on a Next.js project. I had a couple of small pieces of functionality on a page. One handled a simple UI effect, and another handled fetching and displaying content. My instinct was to separate everything into different files and wire them together manually, the same way I had learned early on.
+
+It worked, but it introduced unnecessary friction. Tracking down behavior meant jumping between files. Making small changes required touching multiple places. When I refactored the logic into components and kept related code together, everything became easier to reason about. The structure was cleaner, not messier.
+
+I also briefly explored SvelteKit. I did not spend enough time with it to claim real experience, but it reinforced the same idea. Svelte uses single-file components where JavaScript, markup, and styles live together in a structured way. The separation is still present, but it is organized around the component instead of the file type. That approach felt more natural once I stopped trying to force everything into separate global files.
+
+None of this invalidates the original concept of separation of concerns. If anything, it reinforces it.
+
+Separation of concerns is not about file extensions. It is about responsibility. It is about making sure that different parts of an application can change without breaking everything else. There are multiple ways to achieve that, and modern frameworks have shifted how that separation is implemented.
+
+Strict rules can be useful when you are learning. They give you a foundation. Over time, those rules need to evolve into principles that can adapt to different tools and environments.
+
+Looking back, the rigid version I learned did its job. It taught discipline and introduced an important concept. But real-world development requires flexibility. The goal is not to follow a rule for its own sake. The goal is to write code that is maintainable, scalable, and easy to work with over time.
+
+Separation of concerns still matters. It always will. The difference now is understanding that it is a principle, not a rule set. Once that shift happens, the goal is no longer to follow a pattern exactly as it was taught, but to apply it in a way that makes the code easier to build, understand, and maintain.
