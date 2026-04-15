@@ -37,7 +37,7 @@ export default function WebWork() {
       id="web-work"
       aria-label="Web development work"
     >
-      {/* ── Ghost "03" numeral — bottom-left ── */}
+      {/* ── Ghost "04" numeral — bottom-left ── */}
       <motion.span
         aria-hidden="true"
         style={{
@@ -58,7 +58,7 @@ export default function WebWork() {
         animate={isInView ? { opacity: 1, rotate: -8 } : {}}
         transition={{ duration: 1.1, ease: EXPO_OUT }}
       >
-        03
+        04
       </motion.span>
 
       {/* ── Ambient glow ── */}

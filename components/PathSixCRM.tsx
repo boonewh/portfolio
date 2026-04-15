@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -106,11 +107,31 @@ export default function PathSixCRM() {
           PathSix <span style={{ color: '#22d3ee' }}>CRM</span>
         </motion.h2>
 
-        <motion.p style={{ fontFamily: 'var(--font-geist-sans)', fontSize: '15px', lineHeight: 1.8, color: 'rgba(255,255,255,0.45)', marginBottom: '24px' }} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.42 }}>
-          A complete customer relationship platform built from scratch.
-          AI was in the room the whole time — not a shortcut, a collaborator.
-          Every module, every edge case, architected together.
+        <motion.p style={{ fontFamily: 'var(--font-geist-sans)', fontSize: '15px', lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.42 }}>
+          A multi-tenant SaaS CRM built from scratch — React, Quart, and PostgreSQL.
+          Real clients, real data. Designed for the full sales lifecycle: lead capture,
+          client management, project tracking, and a reporting suite that actually answers business questions.
         </motion.p>
+
+        <motion.ul
+          style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0', display: 'flex', flexDirection: 'column', gap: '9px' }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.48 }}
+        >
+          {[
+            'Multi-tenant architecture — complete data isolation at the query layer',
+            'White-label config: branding, labels, statuses, and feature toggles per tenant',
+            '13 reporting endpoints — pipeline, revenue forecasting, conversion rates, retention',
+            'JWT auth + role-based permissions + IP rate limiting on all auth routes',
+            'Encrypted backup pipeline: AES-256 → SHA-256 checksum → Backblaze B2',
+          ].map((item) => (
+            <li key={item} style={{ display: 'flex', gap: '10px', fontFamily: 'var(--font-geist-mono)', fontSize: '11px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.6 }}>
+              <span style={{ color: '#22d3ee', flexShrink: 0 }}>—</span>
+              {item}
+            </li>
+          ))}
+        </motion.ul>
 
         <motion.div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '36px' }} initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.52 }}>
           {['Vite', 'React', 'Quart', 'PostgreSQL', 'Tailwind'].map((tag) => (
@@ -120,23 +141,36 @@ export default function PathSixCRM() {
           ))}
         </motion.div>
 
-        <motion.a
-          href="https://pathsixsolutions.com/crm"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', marginBottom: isMobile ? '32px' : 0 }}
+        <motion.div
+          style={{ display: 'flex', gap: '28px', flexWrap: 'wrap', alignItems: 'center', marginBottom: isMobile ? '32px' : 0 }}
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.65, ease: EXPO_OUT }}
-          whileHover={{ x: 5 }}
         >
-          <span style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '12px', letterSpacing: '0.14em', color: '#22d3ee', textTransform: 'uppercase' }}>
-            View live site
-          </span>
-          <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style={{ overflow: 'visible' }} aria-hidden="true">
-            <motion.path d="M3 10h14M11 4l6 6-6 6" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={isInView ? { pathLength: 1 } : {}} transition={{ duration: 0.6, delay: 0.9 }} />
-          </svg>
-        </motion.a>
+          <motion.a
+            href="https://pathsixsolutions.com/crm"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
+            whileHover={{ x: 5 }}
+          >
+            <span style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '12px', letterSpacing: '0.14em', color: '#22d3ee', textTransform: 'uppercase' }}>
+              View live site
+            </span>
+            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style={{ overflow: 'visible' }} aria-hidden="true">
+              <motion.path d="M3 10h14M11 4l6 6-6 6" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={isInView ? { pathLength: 1 } : {}} transition={{ duration: 0.6, delay: 0.9 }} />
+            </svg>
+          </motion.a>
+
+          <Link
+            href="/projects/pathsix-crm"
+            style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '12px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.28)', textTransform: 'uppercase', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.28)')}
+          >
+            Case study →
+          </Link>
+        </motion.div>
 
         <motion.p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '10px', letterSpacing: '0.2em', color: 'rgba(168,85,247,0.5)', textTransform: 'uppercase', marginTop: '28px' }} initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.75 }}>
           — AI + Human · 2024

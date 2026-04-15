@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
@@ -41,7 +42,8 @@ function AppCard({
   tagline,
   desc,
   href,
-  comingSoon,
+  caseStudyHref,
+  highlights,
   accentColor,
   borderColor,
   rotation,
@@ -55,7 +57,8 @@ function AppCard({
   tagline: string;
   desc: string;
   href: string;
-  comingSoon?: boolean;
+  caseStudyHref?: string;
+  highlights?: string[];
   accentColor: string;
   borderColor: string;
   rotation: string;
@@ -203,53 +206,44 @@ function AppCard({
             {children}
           </div>
 
-          {/* CTA */}
-          {comingSoon ? (
-            <span
-              style={{
-                fontFamily: 'var(--font-geist-mono)',
-                fontSize: '11px',
-                letterSpacing: '0.14em',
-                color: 'rgba(255,255,255,0.2)',
-                textTransform: 'uppercase',
-              }}
-            >
-              ◌ Site coming soon
-            </span>
-          ) : (
+          {/* Highlights */}
+          {highlights && highlights.length > 0 && (
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px 0', display: 'flex', flexDirection: 'column', gap: '7px' }}>
+              {highlights.map((item) => (
+                <li key={item} style={{ display: 'flex', gap: '8px', fontFamily: 'var(--font-geist-mono)', fontSize: '10px', lineHeight: 1.6, color: 'rgba(255,255,255,0.35)' }}>
+                  <span style={{ color: accentColor, flexShrink: 0 }}>—</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* CTAs */}
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                textDecoration: 'none',
-              }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
             >
-              <span
-                style={{
-                  fontFamily: 'var(--font-geist-mono)',
-                  fontSize: '11px',
-                  letterSpacing: '0.14em',
-                  color: accentColor,
-                  textTransform: 'uppercase',
-                }}
-              >
+              <span style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '11px', letterSpacing: '0.14em', color: accentColor, textTransform: 'uppercase' }}>
                 Visit site
               </span>
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path
-                  d="M3 10h14M11 4l6 6-6 6"
-                  stroke={accentColor}
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M3 10h14M11 4l6 6-6 6" stroke={accentColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-          )}
+            {caseStudyHref && (
+              <Link
+                href={caseStudyHref}
+                style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '11px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', textDecoration: 'none' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}
+              >
+                Case study →
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -370,8 +364,14 @@ export default function AIBuilds() {
             name="Sunday"
             nameAccent="Nudge"
             tagline="Just Text. Just Done."
-            desc="No app. No account. Text what you need to remember — get a text back when it's time. Pure SMS, zero friction."
+            desc="No app. No account. Text what you want to remember — get a text back when it's time. Claude Haiku parses natural language. DST-safe scheduling. 14+ SMS commands."
             href="https://sundaynudge.com"
+            caseStudyHref="/projects/nudge"
+            highlights={[
+              'Claude Haiku parses free-text scheduling with confidence-gated automation',
+              'DST-safe "wall clock intent" — 9am stays 9am after daylight saving transitions',
+              '14+ SMS commands: LIST, SNOOZE, DONE, PAUSE, QUIET, TIMEZONE, and more',
+            ]}
             accentColor="#ec4899"
             borderColor="rgba(236,72,153,0.2)"
             rotation="rotate(-2deg)"
@@ -393,9 +393,14 @@ export default function AIBuilds() {
             name="Nudge"
             nameAccent="Together"
             tagline="Accountability, as a group."
-            desc="The group version. Invite your team, family, or crew. Everyone gets the nudge. Everyone stays accountable."
-            href=""
-            comingSoon
+            desc="The group version. Invite your team, family, or crew. Everyone gets the nudge. Everyone stays accountable. Same SMS-native architecture, built for shared commitments."
+            href="https://nudgetogether.com"
+            caseStudyHref="/projects/nudge"
+            highlights={[
+              'Shared group reminders via SMS — no app, no login required',
+              'Consent-gated onboarding with STOP/START compliance (TCPA)',
+              'Shares scheduling, AI, and Twilio logic with Sunday Nudge via @nudge/core',
+            ]}
             accentColor="#22d3ee"
             borderColor="rgba(34,211,238,0.18)"
             rotation="rotate(1.5deg)"

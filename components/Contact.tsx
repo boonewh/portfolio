@@ -32,7 +32,7 @@ export default function Contact() {
         }}
       />
 
-      {/* ── Ghost "04" — top right ── */}
+      {/* ── Ghost "05" — top right ── */}
       <motion.span
         aria-hidden="true"
         style={{
@@ -53,7 +53,7 @@ export default function Contact() {
         animate={isInView ? { opacity: 1, rotate: 5 } : {}}
         transition={{ duration: 1.1, ease: EXPO_OUT }}
       >
-        04
+        05
       </motion.span>
 
       {/* ── Content ── */}

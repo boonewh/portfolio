@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -14,6 +15,13 @@ const navLinks = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
+  function navHref(href: string) {
+    if (href.startsWith('#') && !isHome) return `/${href}`;
+    return href;
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -72,7 +80,7 @@ export default function Header() {
           {navLinks.map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={navHref(link.href)}
               style={{
                 fontFamily: 'var(--font-geist-mono)',
                 fontSize: '11px',
@@ -191,7 +199,7 @@ export default function Header() {
               {navLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={link.href}
+                  href={navHref(link.href)}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
                     fontFamily: 'var(--font-geist-mono)',
