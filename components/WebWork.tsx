@@ -58,7 +58,7 @@ export default function WebWork() {
         animate={isInView ? { opacity: 1, rotate: -8 } : {}}
         transition={{ duration: 1.1, ease: EXPO_OUT }}
       >
-        04
+        05
       </motion.span>
 
       {/* ── Ambient glow ── */}

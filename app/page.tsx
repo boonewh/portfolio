@@ -19,6 +19,7 @@ import Hero from '@/components/Hero';
 import PathSixCRM from '@/components/PathSixCRM';
 import AIBuilds from '@/components/AIBuilds';
 import OSG from '@/components/OSG';
+import CABCEmailRouter from '@/components/CABCEmailRouter';
 import WebWork from '@/components/WebWork';
 import Contact from '@/components/Contact';
 import GlowScroll from '@/components/GlowScroll';
@@ -32,6 +33,7 @@ export default function Home() {
         <Hero />
         <PathSixCRM />
         <AIBuilds />
+        <CABCEmailRouter />
         <OSG />
         <WebWork />
         <Contact />

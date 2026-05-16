@@ -50,7 +50,7 @@ export default function OSG() {
         animate={isInView ? { opacity: 1, rotate: 8 } : {}}
         transition={{ duration: 1.1, ease: EXPO_OUT }}
       >
-        03
+        04
       </motion.span>
 
       {/* ── Screenshot — desktop only, LEFT side this time ── */}
@@ -64,7 +64,7 @@ export default function OSG() {
           >
             <div aria-hidden="true" style={{ position: 'absolute', inset: '-80px', zIndex: -1, borderRadius: '16px', background: 'radial-gradient(ellipse at 30% 50%, rgba(34,197,94,0.12) 0%, transparent 70%)', filter: 'blur(28px)' }} />
             <Image
-              src="/images/osg.jpg"
+              src="/images/belles_beaux_hero_capture.jpg"
               alt="Odessa Symphony Guild Belles & Beaux platform"
               width={720}
               height={460}
@@ -125,9 +125,10 @@ export default function OSG() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.42 }}
         >
-          A production membership and payment platform for the Belles &amp; Beaux program.
-          Replaced manual intake and spreadsheet tracking with a structured, auditable
-          workflow — enrollment, QuickBooks invoicing, and automated payment reconciliation.
+          A production QuickBooks Online integration and student registration platform
+          built for a performing arts organization with a hard deadline — a parent meeting
+          where signups were expected that night. Registration creates the invoice,
+          payment fires a signed webhook, and the roster updates automatically.
         </motion.p>
 
         <motion.ul
@@ -137,10 +138,10 @@ export default function OSG() {
           transition={{ duration: 0.7, delay: 0.48 }}
         >
           {[
-            'QuickBooks OAuth 2.0 + AES-256-GCM encrypted token storage',
-            'HMAC-SHA256 signed webhooks — auto-syncs paid status via QB\'s LinkedTxn[]',
-            'Web Crypto API rewrite for Edge middleware compatibility',
-            '3-step enrollment: dynamic guardian capture, Zod superRefine, reCAPTCHA v2',
+            'QuickBooks invoice + customer created automatically on every registration',
+            'Signed webhooks resolve paid status in real time — traverses Payment.Line[].LinkedTxn[]',
+            'Dual-format handler: runtime detection for Intuit\'s mandatory CloudEvents migration',
+            'AES-256-GCM encrypted OAuth tokens + Web Crypto API for Edge-compatible session auth',
             'Graceful degradation — QB failures never block student registration',
           ].map((item) => (
             <li key={item} style={{ display: 'flex', gap: '10px', fontFamily: 'var(--font-geist-mono)', fontSize: '11px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.6 }}>
@@ -156,7 +157,7 @@ export default function OSG() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.52 }}
         >
-          {['Next.js 16', 'TypeScript', 'Supabase', 'QuickBooks API', 'Zod', 'Vercel'].map((tag) => (
+          {['Next.js', 'TypeScript', 'Supabase', 'QuickBooks Online API', 'Intuit OAuth', 'Zod', 'Vercel'].map((tag) => (
             <span key={tag} style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '10px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: '3px', padding: '3px 9px' }}>
               {tag}
             </span>
@@ -180,6 +181,17 @@ export default function OSG() {
               <motion.path d="M3 10h14M11 4l6 6-6 6" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={isInView ? { pathLength: 1 } : {}} transition={{ duration: 0.6, delay: 0.9 }} />
             </svg>
           </Link>
+
+          <motion.a
+            href="https://www.odessasymphonyguild.org/belles-beaux"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '12px', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.28)', textTransform: 'uppercase', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.28)')}
+          >
+            Program page ↗
+          </motion.a>
         </motion.div>
 
         <motion.p
@@ -208,7 +220,7 @@ export default function OSG() {
             </div>
           </div>
           <Image
-            src="/images/osg.jpg"
+            src="/images/belles_beaux_hero_capture.jpg"
             alt="Odessa Symphony Guild Belles & Beaux platform"
             width={720}
             height={460}

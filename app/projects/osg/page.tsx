@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 
 export const metadata = {
-  title: 'Odessa Symphony Guild — Project Deep Dive | Will Boone',
+  title: 'OSG Belles & Beaux Platform — Project Deep Dive | Will Boone',
   description:
-    'A production membership and payment platform for the Odessa Symphony Guild Belles & Beaux program — Next.js 16, Supabase, QuickBooks OAuth 2.0, AES-256-GCM, and HMAC-SHA256 signed webhooks.',
+    'A production QuickBooks Online integration and student registration system for the Odessa Symphony Guild — built against a hard deadline, with automated invoice creation, signed webhooks, and a dual-format CloudEvents migration.',
 };
 
 const STACK = ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'QuickBooks Online API', 'Intuit OAuth 2.0', 'Zod', 'React Hook Form', 'Web Crypto API', 'Vercel'];
@@ -16,8 +16,8 @@ const FEATURES = [
     body: 'Full Intuit OAuth flow: authorization endpoint, callback handler, token exchange, and secure storage. Tokens encrypted at rest with AES-256-GCM using environment-managed keys. Automatic access token refresh on expiry, including refresh-token expiry handling.',
   },
   {
-    label: 'Payment → Invoice reconciliation',
-    body: 'Signed webhook endpoint for Intuit payment notifications with HMAC-SHA256 signature verification using timingSafeEqual. Resolved the non-obvious event modeling problem: Payment events don\'t directly contain Invoice IDs — you have to traverse Payment.Line[].LinkedTxn[] to find them. Automating paid-status sync in Supabase required understanding this structure from the QB API docs and logs.',
+    label: 'Webhook-driven paid status',
+    body: 'When payment clears in QuickBooks, a signed HMAC-SHA256 webhook fires and updates the student\'s record in Supabase. Payment events don\'t contain Invoice IDs directly — the handler traverses Payment.Line[].LinkedTxn[] to find the linked invoice, then matches against the stored qb_invoice_id. The handler also detects and supports Intuit\'s CloudEvents envelope format alongside the legacy eventNotifications structure, covering their mandatory 2026 migration.',
   },
   {
     label: 'Edge-compatible session security',
@@ -70,6 +70,7 @@ const TECH_SECTIONS = [
   {
     heading: 'QuickBooks',
     points: [
+      'Dual-format webhook handler: runtime detection of legacy eventNotifications vs CloudEvents envelope — both paths normalize to the same downstream logic, making the Intuit portal toggle the deployment mechanism rather than a code deployment',
       'Customer find-or-create flow keyed by primary email to avoid duplicate payer records',
       'Invoices with due dates, line items, and ACH/credit-card online payment enabled (AllowOnlinePayment: true)',
       'Multi-recipient invoice delivery for additional guardian email addresses',
@@ -91,20 +92,20 @@ const TECH_SECTIONS = [
 
 const CHALLENGES = [
   {
-    label: 'QB Payment → Invoice reconciliation',
-    body: 'QuickBooks webhook events for payments don\'t include the Invoice ID directly. To automate paid-status sync, you have to traverse Payment.Line[].LinkedTxn[] to find the linked invoice. This structure isn\'t obvious from the top-level documentation — it required reading the API reference carefully, reproducing the event shape from logs, and building the traversal logic to extract the correct IDs.',
+    label: "Navigating Intuit's production approval process against a hard deadline",
+    body: "The deadline wasn't a project milestone — it was a parent and student meeting where the system needed to be live and working that night. Intuit's production app review process, however, is sequential: one issue is surfaced per round, a rejection is sent, and the reviewer waits for resubmission before looking further. The first rejection arrived with no explanation — a follow-up email was required just to find out what needed fixing. Subsequent rounds surfaced a legal counsel review requirement and two separate reCAPTCHA flags. Approval came through in time. Getting there required treating every resubmission as the last available opportunity — proactively documenting compliance and anticipating what a reviewer might flag next rather than waiting to be told.",
+  },
+  {
+    label: 'QuickBooks webhook reliability',
+    body: "QuickBooks does not reliably fire Invoice Update events when a payment is applied. Relying on Invoice events alone would mean payments that go through in QuickBooks silently fail to update the roster. The solution listens primarily for Payment Create and Update events — when one arrives, a secondary QBO API call fetches the payment record, traverses the linked transaction list, and extracts the invoice ID. That ID is matched against the stored qb_invoice_id in Supabase. The Invoice Update path is retained as a secondary route but is not the primary mechanism.",
   },
   {
     label: 'Edge runtime crypto rewrite',
     body: 'The original admin session validation used Node.js crypto module, which is unavailable in the Next.js Edge runtime. Middleware runs on the Edge, so all Node APIs break silently or throw. The fix was a full rewrite to Web Crypto API (crypto.subtle) — same algorithm, different API surface, with async/await throughout since crypto.subtle is promise-based unlike the synchronous Node version.',
   },
   {
-    label: 'Dynamic guardian schema migration',
-    body: 'The original schema had mom_* and dad_* columns — a two-guardian assumption baked into the data model. Expanding to 1–4 guardians required a migration that added 36 new relational columns while keeping all existing records readable and displayable. The display layer had to support both old and new column formats simultaneously without a big-bang migration of historical data.',
-  },
-  {
-    label: 'Graceful QB degradation',
-    body: 'QuickBooks is a third-party dependency that can fail at any point — auth expiry, API rate limits, network timeouts. Student registration couldn\'t be blocked by any of those. The solution was a clear separation: Supabase persistence is the primary operation, QB operations are secondary and non-blocking. Failures are logged with enough context (intuit_tid, error shape) to retry manually if needed.',
+    label: 'Mandatory platform migration with a live production system',
+    body: "Intuit mandated that all webhook consumers migrate from their legacy payload format to the CloudEvents envelope structure. The legacy format wraps events in an eventNotifications object; the CloudEvents format is a top-level JSON array where entity name and operation are encoded in a type field like qbo.payment.created.v1. Rather than a hard cutover, the handler was updated to detect the format at runtime and route to the appropriate parser — both paths normalize to the same downstream logic. The portal toggle in the Intuit Developer Portal becomes the deployment mechanism: it can be flipped on, tested, and rolled back without touching code.",
   },
 ];
 
@@ -129,10 +130,13 @@ export default function OSGPage() {
             Project deep dive
           </p>
           <h1 style={{ fontFamily: 'var(--font-alkatra)', fontSize: 'clamp(42px, 7vw, 96px)', lineHeight: 1.0, color: '#ffffff', marginBottom: '24px' }}>
-            Odessa Symphony <span style={{ color: '#22c55e' }}>Guild</span>
+            Belles &amp; Beaux <span style={{ color: '#22c55e' }}>Platform</span>
           </h1>
           <p style={{ fontFamily: 'var(--font-geist-sans)', fontSize: '18px', lineHeight: 1.75, color: 'rgba(255,255,255,0.5)', maxWidth: '640px', marginBottom: '32px' }}>
-            A production membership and payment platform for the Belles &amp; Beaux program — replacing manual spreadsheet intake with structured enrollment, QuickBooks invoicing, and automated payment reconciliation via signed webhooks.
+            A production QuickBooks Online integration and student registration system built for a real
+            performing arts organization — not a demo, not a tutorial. Designed, architected, and shipped
+            to handle real dues payments and automate the entire signup-to-paid workflow against a fixed
+            real-world deadline.
           </p>
 
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '36px' }}>
@@ -142,17 +146,43 @@ export default function OSGPage() {
               </span>
             ))}
           </div>
+
+          {/* CTA */}
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <a
+              href="https://www.odessasymphonyguild.org/belles-beaux"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', textDecoration: 'none', color: '#22c55e', border: '1px solid rgba(34,197,94,0.3)', borderRadius: '4px', padding: '8px 18px' }}
+            >
+              Belles &amp; Beaux program ↗
+            </a>
+            <span style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '10px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.08em' }}>
+              public program page — not the admin system
+            </span>
+          </div>
         </div>
 
-        {/* Screenshot */}
-        <div style={{ marginBottom: '96px', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(34,197,94,0.1)', boxShadow: '0 40px 90px rgba(0,0,0,0.7), 0 0 0 1px rgba(34,197,94,0.04)' }}>
-          <Image
-            src="/images/osg.jpg"
-            alt="Odessa Symphony Guild Belles & Beaux platform"
-            width={900}
-            height={560}
-            style={{ width: '100%', height: 'auto', display: 'block' }}
-          />
+        {/* Screenshots */}
+        <div style={{ marginBottom: '96px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(34,197,94,0.1)', boxShadow: '0 40px 90px rgba(0,0,0,0.7), 0 0 0 1px rgba(34,197,94,0.04)' }}>
+            <Image
+              src="/images/belles_beaux_hero_capture.jpg"
+              alt="Odessa Symphony Guild Belles & Beaux public program page"
+              width={900}
+              height={560}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
+          <div style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(34,197,94,0.08)', boxShadow: '0 20px 60px rgba(0,0,0,0.6)' }}>
+            <Image
+              src="/images/admin-panel-top.jpg"
+              alt="Belles & Beaux admin roster"
+              width={900}
+              height={280}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
         </div>
 
         <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '96px' }} />
@@ -162,13 +192,22 @@ export default function OSGPage() {
           <p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '10px', letterSpacing: '0.22em', color: '#22c55e', textTransform: 'uppercase', marginBottom: '20px' }}>Overview</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', fontFamily: 'var(--font-geist-sans)', fontSize: '16px', lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', maxWidth: '720px' }}>
             <p>
-              The Odessa Symphony Guild runs a student membership program called Belles &amp; Beaux. Before this platform, enrollment happened through paper forms and email, dues were tracked in spreadsheets, and payment status required manual reconciliation with QuickBooks. The system worked — until it didn't.
+              The Odessa Symphony Guild&apos;s Belles &amp; Beaux program needed a way for incoming students
+              and their parents to register and pay dues online. The existing process was manual —
+              paper forms, chased invoices, no automation. The replacement needed to be live and working
+              for one specific event: the program&apos;s parent and student meeting, where signups were
+              expected to happen that night.
             </p>
             <p>
-              This project replaced that workflow end-to-end: families complete a structured three-step registration with dynamic guardian capture, legal consent, and live dues calculation. Submitting the form generates a QuickBooks customer record and sends a payment-enabled invoice automatically. When payment clears, a signed webhook updates the student's status in Supabase without any admin involvement.
+              That deadline wasn&apos;t a soft target. It was a room full of parents with phones in their hands.
             </p>
             <p>
-              The technical challenge wasn't any single feature — it was the combination: real third-party payment integration, compliance-grade security, schema evolution without breaking historical records, and making sure none of it could fail in a way that blocked a family from registering their kid.
+              The system handles the full workflow end to end. A student fills out a multi-step registration
+              form, a QuickBooks invoice is created automatically in the background, the parent is redirected
+              to QuickBooks&apos; hosted payment page, and a signed webhook fires when payment clears —
+              marking the student as paid in the roster without anyone touching a dashboard. If a parent
+              exits before paying and returns days later via the invoice email, the webhook still fires
+              and the roster still updates automatically.
             </p>
           </div>
         </section>
@@ -257,6 +296,14 @@ export default function OSGPage() {
           >
             ← Back to portfolio
           </Link>
+          <a
+            href="https://www.odessasymphonyguild.org/belles-beaux"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontFamily: 'var(--font-geist-mono)', fontSize: '11px', letterSpacing: '0.16em', color: '#22c55e', textTransform: 'uppercase', textDecoration: 'none' }}
+          >
+            Belles &amp; Beaux program ↗
+          </a>
         </div>
 
       </main>
