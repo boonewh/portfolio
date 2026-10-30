@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Maintained runtime and verification
+
+Use Node24.22.1/npm11.17.0. Run `npm ci`, `npm run lint`, `npm run typecheck`,
+`npm test`, `npm run build`, `npx playwright install chromium`, and `npm run check:upgrade`.
+Checks do not send messages or follow external case-study links.
+Publish blog articles as regular `.mdx` files directly in `content/blog`, then deploy;
+only published filenames become routes. See [maintenance notes](docs/SECURITY-MAINTENANCE-2026-10.md).
+
 ## Getting Started
 
 First, run the development server:

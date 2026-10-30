@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
 export default function GlowScroll() {
   const { scrollYProgress } = useScroll();
@@ -10,15 +9,6 @@ export default function GlowScroll() {
     damping: 30,
     restDelta: 0.001
   });
-
-  const [windowHeight, setWindowHeight] = useState(0);
-
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-    const handleResize = () => setWindowHeight(window.innerHeight);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Transform scroll progress to color cycle
   const background = useTransform(

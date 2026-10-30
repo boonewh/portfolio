@@ -4,6 +4,13 @@ import matter from 'gray-matter';
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
 
+function publishedFiles(): string[] {
+  if (!fs.existsSync(BLOG_DIR)) return [];
+  return fs.readdirSync(BLOG_DIR, { withFileTypes: true })
+    .filter(entry => entry.isFile() && entry.name.endsWith('.mdx'))
+    .map(entry => entry.name);
+}
+
 export interface PostMeta {
   slug: string;
   title: string;
@@ -13,10 +20,7 @@ export interface PostMeta {
 }
 
 export function getAllPosts(): PostMeta[] {
-  if (!fs.existsSync(BLOG_DIR)) return [];
-  return fs
-    .readdirSync(BLOG_DIR)
-    .filter((f) => f.endsWith('.mdx'))
+  return publishedFiles()
     .map((filename) => {
       const slug = filename.replace('.mdx', '');
       const raw = fs.readFileSync(path.join(BLOG_DIR, filename), 'utf8');
@@ -27,6 +31,10 @@ export function getAllPosts(): PostMeta[] {
 }
 
 export function getPostBySlug(slug: string) {
+  // Route input may select only a published, regular file inside the blog directory.
+  if (typeof slug !== 'string' || !publishedFiles().includes(`${slug}.mdx`)) {
+    throw new Error('Post not found');
+  }
   const filepath = path.join(BLOG_DIR, `${slug}.mdx`);
   const raw = fs.readFileSync(filepath, 'utf8');
   const { data, content } = matter(raw);

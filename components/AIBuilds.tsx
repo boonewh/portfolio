@@ -46,7 +46,6 @@ function AppCard({
   highlights,
   accentColor,
   borderColor,
-  rotation,
   delay,
   children,
 }: {
