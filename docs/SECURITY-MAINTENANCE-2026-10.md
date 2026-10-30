@@ -21,6 +21,12 @@ CSS matched the current latest response before changing the reference. Existing
 Google fonts, contact mailto, case-study links/content and image configuration remain.
 No application database/provider settings or content/design migration is introduced.
 
+Live checks found the existing blog-card date formatter used the visitor's timezone,
+while Vercel rendered in UTC. Central-time visitors saw the preceding day and a
+recoverable React418 hydration error. Explicit UTC formatting now preserves the
+written publication day for cards and article headers. Browser checks use a UTC
+server plus UTC/Central visitor contexts; a unit test also covers Kiritimati.
+
 Audit, lint, typecheck, two blog-security tests, build and browser/site checks run
 on pinned Ubuntu24.04 CI. Tests cover every published page/article, referenced local
 images, metadata, sitemap/robots/icons/noindex404, mobile menu and blog/case navigation,

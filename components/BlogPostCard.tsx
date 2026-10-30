@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { PostMeta } from '@/lib/blog';
+import type { PostMeta } from '@/lib/blog';
+import { formatPostDate } from '@/lib/post-date';
 
 export default function BlogPostCard({ post }: { post: PostMeta }) {
   return (
@@ -73,7 +74,7 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
               flexShrink: 0,
             }}
           >
-            {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            {formatPostDate(post.date)}
           </time>
         </div>
       </article>
