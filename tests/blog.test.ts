@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {test, mock} from 'node:test';
 import {getAllPosts, getPostBySlug} from '../lib/blog';
+import {formatPostDate} from '../lib/post-date';
 
 test('every published article retains its metadata and nonempty MDX', () => {
   const posts = getAllPosts();
@@ -10,6 +11,20 @@ test('every published article retains its metadata and nonempty MDX', () => {
     const loaded = getPostBySlug(post.slug);
     assert.equal(loaded.meta.title, post.title);
     assert(loaded.content.trim());
+  }
+});
+
+test('publication day is stable across server/visitor timezones', () => {
+  const previous = process.env.TZ;
+  try {
+    for (const zone of ['UTC', 'America/Chicago', 'Pacific/Kiritimati']) {
+      process.env.TZ = zone;
+      assert.equal(formatPostDate('2026-03-15'), 'Mar 15, 2026');
+      assert.equal(formatPostDate('2026-03-15', 'long'), 'March 15, 2026');
+    }
+  } finally {
+    if (previous === undefined) delete process.env.TZ;
+    else process.env.TZ = previous;
   }
 });
 

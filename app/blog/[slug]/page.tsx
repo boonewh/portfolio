@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { formatPostDate } from '@/lib/post-date';
 
 export const dynamicParams = false;
 
@@ -125,11 +126,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               color: 'rgba(255,255,255,0.25)',
             }}
           >
-            {new Date(meta.date).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
+            {formatPostDate(meta.date, 'long')}
           </time>
         </header>
 
