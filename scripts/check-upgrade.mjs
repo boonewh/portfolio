@@ -41,6 +41,7 @@ async function main(){
    await page.locator('a[href="/blog/'+slugs[0]+'"]').first().click();await page.waitForURL(base+'/blog/'+slugs[0]);await page.locator('.prose-blog h2').first().waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
    await page.goto(base+'/projects/cabc-email-router',{waitUntil:'networkidle'});await page.locator('h1').first().waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
    await page.goto(base+'/#contact',{waitUntil:'networkidle'});await page.locator('#contact').waitFor();assert.equal(await page.locator('#contact a[href="mailto:will@pathsixsolutions.com"]').count(),1);
+   await page.waitForFunction(()=>{const link=document.querySelector('#contact a[href^="mailto:"]');return link&&Number(getComputedStyle(link).opacity)>0.99;},undefined,{timeout:10000});
    await page.screenshot({path:output+stage+'-'+name+'.png',fullPage:false});assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);assert.deepEqual(unexpected,[]);ui.push({name,homeBlogArticleCaseNavigation:true,noOverflow:true,noPageErrors:true,noFailedAssets:true,mailtoPreserved:true});await context.close();
   }}finally{await browser.close();}
   if(process.env.BASELINE_CHECKS_PATH){const before=JSON.parse(fs.readFileSync(process.env.BASELINE_CHECKS_PATH));assert.deepEqual(JSON.parse(JSON.stringify(snapshots)),before.pages,'Titles/headings/descriptions/canonicals retained');}
