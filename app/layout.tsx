@@ -94,7 +94,7 @@ export default function RootLayout({
       <head>
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.18.0/devicon.min.css"
         />
       </head>
       <body

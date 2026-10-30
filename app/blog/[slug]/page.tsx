@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }
@@ -40,11 +42,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  try {
-    var { meta, content } = getPostBySlug(slug);
-  } catch {
-    notFound();
-  }
+  const { meta, content } = (() => {
+    try { return getPostBySlug(slug); }
+    catch { notFound(); }
+  })();
 
   return (
     <div

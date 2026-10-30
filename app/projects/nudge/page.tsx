@@ -163,7 +163,7 @@ export default function NudgePage() {
               Both apps live in a single pnpm monorepo and share a TypeScript core package (@nudge/core) that centralizes scheduling, timezone conversion, AI parsing, Twilio integration, rate limiting, and logging. The shared package is compiled directly by each app via transpilePackages — no separate build or publish step.
             </p>
             <p>
-              The hardest parts weren't the features — they were the edge cases that only show up in production: DST transitions drifting scheduled times, AI parses that are probably right but not certainly right, and browser bundles breaking because a shared package imported a Node-only module. Getting those right is what separates a deployed app from a demo.
+              The hardest parts weren&apos;t the features — they were the edge cases that only show up in production: DST transitions drifting scheduled times, AI parses that are probably right but not certainly right, and browser bundles breaking because a shared package imported a Node-only module. Getting those right is what separates a deployed app from a demo.
             </p>
           </div>
         </section>

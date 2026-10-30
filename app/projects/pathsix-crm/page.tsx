@@ -184,7 +184,7 @@ export default function PathSixCRMPage() {
               PathSix CRM handles the full client lifecycle for small business operators — from the first lead contact through conversion, active project management, and subscription tracking. It was built because the off-the-shelf options were either overbuilt for enterprise or too generic to fit how field services businesses actually operate.
             </p>
             <p>
-              Every data model, API route, and UI flow was designed intentionally. Multi-tenant isolation, white-label configuration, and a real reporting suite weren't bolted on after the fact — they were architectural decisions made at the start.
+              Every data model, API route, and UI flow was designed intentionally. Multi-tenant isolation, white-label configuration, and a real reporting suite weren&apos;t bolted on after the fact — they were architectural decisions made at the start.
             </p>
             <p>
               AI was a genuine collaborator throughout, not autocomplete. Architecture reviews, edge case discovery, query design, and security considerations all happened in conversation. That changed what was achievable in the timeline without cutting corners on quality.
