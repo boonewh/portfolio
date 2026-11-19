@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
+  { label: 'Factory',      href: '#factory'   },
   { label: 'Built w/ AI',  href: '#crm'       },
   { label: 'AI First',     href: '#ai-builds'  },
   { label: 'Web Work',     href: '#web-work'   },

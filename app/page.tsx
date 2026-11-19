@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   },
 };
 import Hero from '@/components/Hero';
+import Factory from '@/components/Factory';
 import PathSixCRM from '@/components/PathSixCRM';
 import AIBuilds from '@/components/AIBuilds';
 import OSG from '@/components/OSG';
@@ -31,6 +32,7 @@ export default function Home() {
       <Header />
       <main className="flex flex-col relative z-0">
         <Hero />
+        <Factory />
         <PathSixCRM />
         <AIBuilds />
         <CABCEmailRouter />
