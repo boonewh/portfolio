@@ -9,7 +9,7 @@ const output=fileURLToPath(new URL('../test-results/',import.meta.url));
 fs.mkdirSync(output,{recursive:true});
 const stage=process.env.CHECK_STAGE||'after',base=process.env.SITE_CHECK_BASE_URL||'http://127.0.0.1:3433';
 const slugs=fs.readdirSync(root+'content/blog').filter(f=>f.endsWith('.mdx')).map(f=>f.slice(0,-4));
-const paths=['/','/blog',...slugs.map(s=>'/blog/'+s),'/projects/cabc-email-router','/projects/nudge','/projects/osg','/projects/pathsix-crm'];
+const paths=['/','/blog',...slugs.map(s=>'/blog/'+s),'/projects/cabc-email-router','/projects/factory','/projects/nudge','/projects/osg','/projects/pathsix-crm'];
 let server;
 async function main(){
  if(!process.env.SITE_CHECK_BASE_URL){server=spawn(process.execPath,['node_modules/next/dist/bin/next','start','-H','127.0.0.1','-p','3433'],{cwd:root,env:{...process.env,TZ:'UTC',NEXT_TELEMETRY_DISABLED:'1'},windowsHide:true,stdio:'ignore'});let ready=false;for(let i=0;i<80;i++){if(server.exitCode!==null)throw Error('App exited');try{if((await fetch(base,{signal:AbortSignal.timeout(1000)})).ok){ready=true;break;}}catch{}await new Promise(r=>setTimeout(r,250));}assert(ready);}
